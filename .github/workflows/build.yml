@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Download project
         uses: actions/checkout@v4
 
       - name: Set up Java
@@ -18,11 +18,22 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Build
-        run: chmod +x gradlew && ./gradlew build
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.2'
+
+      - name: Extract project
+        run: |
+          rm -rf project
+          unzip -q FakeDoomsdayClient-FINAL.zip -d project
+
+      - name: Build JAR
+        working-directory: project
+        run: gradle build
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
           name: FakeDoomsdayClient-JAR
-          path: build/libs/*.jar
+          path: project/build/libs/*.jar
