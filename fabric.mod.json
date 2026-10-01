@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "fake-doomsday-client",
+  "version": "${version}",
+  "name": "Fake Doomsday Client",
+  "description": "A visual-only client-style GUI. Modules never alter gameplay.",
+  "authors": [
+    "OpenAI"
+  ],
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.fakedoomsday.client.FakeDoomsdayClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.2",
+    "minecraft": "~1.21.11",
+    "fabric-api": "*"
+  }
+}
